@@ -26,5 +26,10 @@ get('/title') do
 	erb(:index, locals:{posts:all})	
 end
 
+get('/login') do
+    erb(:login)
+end
 
-
+get('/create') do
+    erb(:create)
+end
