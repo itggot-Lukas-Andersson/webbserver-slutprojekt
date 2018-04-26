@@ -5,13 +5,24 @@
 	<%posts.each do |i|%>
 		<div class="box">
 			<div class="box1">
-				<p class="title"><%= i[3]%></p>
-				<p class="desc"><%= i[4]%></p>
+				<p class="title"><%= i[2]%></p>
+				<p class="desc"><%= i[3]%></p>
 			</div>
-			<p class="date"><%= i[1]%></p>
+			<p class="creator"><%= i[1]%></p>
 			<div class="box2">
-				<p class="likes"><%= i[2]%></p>
+				<p class="likes"><%= i[4]%></p>
 			</div>
 			</div>
-	<%end%>
+    <%end%>
+    <%comments.each do |i|%>
+		<div class="box">
+			<div class="box1">
+				<p class="title"><%= i[1]%></p>
+				<p class="desc"><%= i[2]%></p>
+			</div>
+			<div class="box2">
+				<p class="likes"><%= i[3]%></p>
+			</div>
+			</div>
+    <%end%>
 </div>

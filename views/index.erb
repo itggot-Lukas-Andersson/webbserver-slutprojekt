@@ -12,12 +12,12 @@
 	<%posts.each do |i|%>
 			<div onclick="window.location='view/' + <%= i[0]%>" class="box">
 				<div class="box1">
-					<p class="title"><%= i[3]%></p>
-					<p class="desc"><%= i[4]%></p>
+					<p class="title"><%= i[2]%></p>
+					<p class="desc"><%= i[3]%></p>
 				</div>
 				<div class="likey">
 					<i class="material-icons">keyboard_arrow_up</i>
-					<p class="points"><%=i[2]%></p>
+					<p class="points"><%=i[4]%></p>
 					<i class="material-icons">keyboard_arrow_down</i>
 				</div>
 			</div>
