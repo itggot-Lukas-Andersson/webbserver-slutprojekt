@@ -34,9 +34,9 @@ module ForumDB
 		return db.execute('SELECT * FROM post ORDER BY title COLLATE NOCASE')
     end
 
-    def get_top
+    def get_fav id
         db = db_connect()
-		return db.execute('SELECT * FROM post ORDER BY points DESC')
+        return db.execute("SELECT * FROM post WHERE id IN (SELECT post FROM favorites WHERE user IS ?)", [id])
     end
 
     def post_info id
@@ -51,12 +51,27 @@ module ForumDB
 
     def publish_comment username, content, post
         db = db_connect()
-        db.execute("INSERT INTO comment(creator, content, post, score) VALUES (?,?,?,?)", [username, content, post, 0])
+        db.execute("INSERT INTO comment(creator, content, post) VALUES (?,?,?)", [username, content, post])
     end
 
     def fetch_liked_posts id
         db = db_connect()
         return db.execute("SELECT * FROM post WHERE id IN (SELECT post FROM likes WHERE user = ?)", [id])
+    end
+
+    def check_fav id, post
+        db = db_connect()
+        return db.execute("SELECT id FROM favorites WHERE user IS ? AND post IS ?", [id, post])
+    end
+
+    def favorite id, post
+        db = db_connect()
+        db.execute("INSERT INTO favorites(user, post) VALUES (?,?)", [id, post])
+    end
+
+    def unfav id, post
+        db = db_connect()
+        db.execute("DELETE FROM favorites WHERE user IS ? AND post IS ?", [id, post])
     end
 
 end

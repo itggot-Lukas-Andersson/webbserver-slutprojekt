@@ -1,10 +1,9 @@
 <header>
 <div class="sort">
     <a href="/home"><h1>New</h1></a>
-    <a href="/hot"><h1>Score</h1></a>
 	<a href="/title"><h1>Alphabetical</h1></a>
-	<a href="/liked"><h1>Liked</h1></a>
-	<a href="/post"><h1>Publish Post</h1></a>
+	<a href="/favorites"><h1>Favorite</h1></a>
+	<a href="/post"><h1>New Post</h1></a>
 </div>
 <form action="/logout" method="POST">
 	<input type="submit" value="Logout" class="logout">
@@ -16,9 +15,7 @@
 				<div class="box1">
 					<p class="title"><%= i[2]%></p>
 					<p class="desc"><%= i[3]%></p>
-				</div>
-				<div class="likey">
-					<p class="points"><%=i[4]%></p>
+					<p class="creator"><%= i[1]%></p>
 				</div>
 			</div>
 	<%end%>

@@ -8,6 +8,10 @@ body{
 	padding: 0;
 }
 
+body::-webkit-scrollbar { 
+    display: none; 
+}
+
 header{
 	width: 100%;
 	height: 100px;
@@ -27,9 +31,10 @@ header{
 }
 
 h1{
+	font-size: 20px;
 	height: 35px;
 	color: rgba(255,255,255,0.8);
-	margin: 0 0 10px 0;
+	margin: 0;
 	padding: 0;
 }
 
@@ -63,24 +68,42 @@ a:hover{
 	flex-direction: column;
 	justify-content: flex-start;
 	width: 95%;
+	padding-bottom: 30px;
 }
 
 p{
 	font-family: Helvetica, sans-serif;
 	font-weight: bold;
+	margin: 10px 0 0 50px;
 }
 
-.title{
-	font-size: 25px;
-}
-
-.desc{
-	opacity: 0.6;
-	margin: 0 0 40px 0;
+i{
+	width: 24px;
+	height: 24px;
+	margin: -12px 0 0 0;
+	color: black;
 }
 
 i:hover{
 	background-color: darkgray;
+}
+
+.fav{
+	height: 48px;
+	width: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.favbutton{
+	height: 24px;
+	width: 24px;
+	border: 0;
+	padding: 0;
+	margin: 0 0 -12px 0;
+	opacity: 0;
 }
 
 .contentlogin{
@@ -179,6 +202,8 @@ input{
 	font-weight: bold;
 	background-color: #212121;
 	border: none;
+	margin: 0;
+	padding: 0;
 }
 
 .home{
@@ -238,4 +263,30 @@ input{
 	height: 125px;
 	margin-top: 30px;
 	padding: 0;
+}
+
+.title{
+	font-weight: bold;
+	font-size: 30px;
+	height: 30px;
+}
+
+.desc{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 14px;
+	color: black;
+	opacity: 0.6;
+	height: 40px;
+}
+
+.creator{
+	font-style: italic;
+	font-weight: bold;
+}
+
+.box1{
+	width: 80%;
+	height: 125px;
 }

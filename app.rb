@@ -23,23 +23,14 @@ class App < Sinatra::Base
 		erb(:create)
 	end
 
-	get('/liked') do
-		user_id = session[:user_id] 
-		if user_id
-			all = fetch_liked_posts(user_id)
-			erb(:home, locals:{posts:all})
-		else
-			redirect('/')
-		end
-	end
-
 	get('/view/:id') do
 		user_id = session[:user_id] 
 		if user_id
 			id = params[:id]
 			post = post_info(id)
 			comments = fetch_comments(id)
-			erb(:view, locals:{posts:post, comments:comments, id:id})
+			fav = check_fav(user_id, id)
+			erb(:view, locals:{posts:post, comments:comments, id:id, favo:fav})
 		else
 			redirect('/')
 		end
@@ -59,11 +50,11 @@ class App < Sinatra::Base
 		end
 	end
 
-	get('/hot') do
+	get('/favorites') do
 		user_id = session[:user_id] 
 		if user_id
-			all = get_top()
-			erb(:home, locals:{posts:all})
+			all = get_fav(user_id)
+			erb(:home, locals:{posts:all})	
 		else
 			redirect('/')
 		end
@@ -160,6 +151,23 @@ class App < Sinatra::Base
 			content = params["content"]
 			publish_post(username, title, content)
 			redirect('/home')
+		else
+			redirect('/')
+		end
+	end
+
+	post('/view/:id/favorite') do
+		user_id = session[:user_id] 
+		if user_id
+			id = params[:id]
+			favorited = check_fav(user_id, id)
+			if favorited[0]
+				unfav(user_id, id)
+				redirect('/view/' + id)
+			else
+				favorite(user_id, id)
+				redirect('/view/' + id)
+			end
 		else
 			redirect('/')
 		end
