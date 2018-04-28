@@ -18,17 +18,6 @@ header{
 	background-color: #191919;
 }
 
-.sign{
-	height: 50px;
-	width: 200px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	background: #232323;
-	margin-right: 40px;
-}
-
 .sort{
 	height: 100%;
 	width: 40%;
@@ -135,12 +124,6 @@ i:hover{
 	align-items: center;
 }
 
-h4{
-	margin: 10px 0 0 0;
-	padding: 0;
-	color: rgba(255,255,255,0.8);
-}
-
 form{
 	width: 200px;
 }
@@ -148,6 +131,18 @@ form{
 input{
 	width: 195px;
 	height: 20px;
+	margin-bottom: 20px;
+}
+
+.loginsub{
+	height: 40px;
+	margin-top: 20px;
+	background-color: #191919;
+	color: rgba(255,255,255,0.8);
+	border: none;
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 17px;
 }
 
 #alter{
@@ -179,10 +174,12 @@ input{
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	font-size: 17px;
 }
 
-.button:hover{
+.button:hover, .loginsub:hover, .logout:hover{
 	background-color: #151515;
+	cursor: pointer;
 }
 
 #alter a{
@@ -190,4 +187,14 @@ input{
 	padding: 0;
 	height: 40px;
 	width:90px;
+}
+
+.logout{
+	width: 150px;
+	height: 50px;
+	color: rgba(255,255,255,0.8);
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	background-color: #212121;
+	border: none;
 }

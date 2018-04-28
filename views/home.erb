@@ -1,0 +1,25 @@
+<header>
+<div class="sort">
+    <a href="/home"><h1>New</h1></a>
+    <a href="/hot"><h1>Score</h1></a>
+    <a href="/title"><h1>Alphabetical</h1></a>
+</div>
+<form action="/logout" method="POST">
+	<input type="submit" value="Logout" class="logout">
+</form>
+</header>
+<div class="content">
+	<%posts.each do |i|%>
+			<div onclick="window.location='view/' + <%= i[0]%>" class="box">
+				<div class="box1">
+					<p class="title"><%= i[2]%></p>
+					<p class="desc"><%= i[3]%></p>
+				</div>
+				<div class="likey">
+					<i class="material-icons">keyboard_arrow_up</i>
+					<p class="points"><%=i[4]%></p>
+					<i class="material-icons">keyboard_arrow_down</i>
+				</div>
+			</div>
+	<%end%>
+</div>
