@@ -26,17 +26,17 @@ module ForumDB
 
     def get_recent
         db = db_connect()
-        return db.execute('SELECT * FROM post ORDER BY id DESC LIMIT 5')
+        return db.execute('SELECT * FROM post ORDER BY id DESC')
     end
 
     def get_az
         db = db_connect()
-		return db.execute('SELECT * FROM post ORDER BY title COLLATE NOCASE LIMIT 5')
+		return db.execute('SELECT * FROM post ORDER BY title COLLATE NOCASE')
     end
 
     def get_top
         db = db_connect()
-		return db.execute('SELECT * FROM post ORDER BY points DESC LIMIT 5')
+		return db.execute('SELECT * FROM post ORDER BY points DESC')
     end
 
     def post_info id
@@ -56,7 +56,7 @@ module ForumDB
 
     def fetch_liked_posts id
         db = db_connect()
-        return db.execute("SELECT * FROM post WHERE id IN ("'SELECT post FROM likes WHERE user IS ?', [id]")")
+        return db.execute("SELECT * FROM post WHERE id IN (SELECT post FROM likes WHERE user = ?)", [id])
     end
 
 end
