@@ -1,0 +1,18 @@
+<header>
+<div class="sort">
+    <a href="/home"><h1>New</h1></a>
+    <a href="/hot"><h1>Score</h1></a>
+	<a href="/title"><h1>Alphabetical</h1></a>
+	<a href="/post"><h1>Publish Post</h1></a>
+</div>
+<form action="/logout" method="POST">
+	<input type="submit" value="Logout" class="logout">
+</form>
+</header>
+<div class="contentpost">
+    <form class="postform" action="/post/publish" method="POST">
+        <input id="titlepost" type="text" name="title" placeholder="Title...">
+        <textarea id="contentpost" name="content" placeholder="text..."></textarea>
+        <input id="publish" type="submit" value="Publish">
+    </form>
+</div>

@@ -1,4 +1,4 @@
-require_relative './module/module'
+require_relative './model/model'
 
 class App < Sinatra::Base
 
@@ -23,19 +23,46 @@ class App < Sinatra::Base
 		erb(:create)
 	end
 
+	get('/liked') do
+		user_id = session[:user_id] 
+		if user_id
+			all = fetch_liked_posts(user_id)
+			erb(:home, locals:{posts:all})
+		else
+			redirect('/')
+		end
+	end
+
 	get('/view/:id') do
-		db = db_connect()
-		id = params[:id]
-		post = db.execute('SELECT * FROM post WHERE id IS ' + id)
-		comments = db.execute('SELECT * FROM comment WHERE post IS ' + id)
-		erb(:view, locals:{posts:post, comments:comments})
+		user_id = session[:user_id] 
+		if user_id
+			id = params[:id]
+			post = post_info(id)
+			comments = fetch_comments(id)
+			erb(:view, locals:{posts:post, comments:comments, id:id})
+		else
+			redirect('/')
+		end
+	end
+
+	post('/view/:id/comment') do
+		user_id = session[:user_id] 
+		if user_id
+			content = params["content"]
+			username = session[:username]
+			id = params[:id]
+			publish_comment(username, content, id)
+			redirect('/view/' + id)
+
+		else
+			redirect('/')
+		end
 	end
 
 	get('/hot') do
 		user_id = session[:user_id] 
 		if user_id
-			db = db_connect()
-			all = db.execute('SELECT * FROM post ORDER BY points DESC LIMIT 5')
+			all = get_top()
 			erb(:home, locals:{posts:all})
 		else
 			redirect('/')
@@ -45,9 +72,8 @@ class App < Sinatra::Base
 	get('/title') do
 		user_id = session[:user_id] 
 		if user_id
-			db = db_connect()
-		all = db.execute('SELECT * FROM post ORDER BY title COLLATE NOCASE LIMIT 5')
-		erb(:home, locals:{posts:all})	
+			all = get_az()
+			erb(:home, locals:{posts:all})	
 		else
 			redirect('/')
 		end
@@ -56,19 +82,8 @@ class App < Sinatra::Base
 	get('/home') do
 		user_id = session[:user_id] 
 		if user_id
-			db = db_connect()
-			all = db.execute('SELECT * FROM post ORDER BY id DESC LIMIT 5')
+			all = get_recent()
 			erb(:home, locals:{posts:all})
-		else
-			redirect('/')
-		end
-	end
-
-	get('/notes') do
-		user_id = session[:user_id] 
-		if user_id
-			notes = list_notes(user_id)
-			slim(:list_notes, locals:{notes:notes})
 		else
 			redirect('/')
 		end
@@ -114,6 +129,7 @@ class App < Sinatra::Base
 		password_digest = user["password_digest"]
 		
 		if BCrypt::Password.new(password_digest) == password
+			session[:username] = username
 			session[:user_id] = user_id
 			redirect('/home')
 		else
@@ -126,5 +142,27 @@ class App < Sinatra::Base
 		session.destroy
 		redirect('/')
 	end
-	
+
+	get('/post') do
+		user_id = session[:user_id]
+		if user_id
+			erb(:post)
+		else
+			redirect('/')
+		end
+	end
+
+	post('/post/publish') do
+		user_id = session[:user_id]
+		if user_id
+			username = session[:username]
+			title = params["title"]
+			content = params["content"]
+			publish_post(username, title, content)
+			redirect('/home')
+		else
+			redirect('/')
+		end
+	end
+
 end

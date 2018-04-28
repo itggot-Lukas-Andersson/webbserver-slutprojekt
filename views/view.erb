@@ -1,5 +1,8 @@
 <header>
-<a href="/"><h1>Hem</h1></a>
+<a href="/home" class="home"><h1>Hem</h1></a>
+<form action="/logout" method="POST">
+	<input type="submit" value="Logout" class="logout">
+</form>
 </header>
 <div class="content">
 	<%posts.each do |i|%>
@@ -24,5 +27,10 @@
 				<p class="likes"><%= i[3]%></p>
 			</div>
 			</div>
-    <%end%>
+	<%end%>
+    <form class="commentform" action="/view/<%= id%>/comment" method="POST">
+        <textarea id="contentcomment" name="content" placeholder="text..."></textarea>
+        <input id="publish" type="submit" value="Publish">
+    </form>
+
 </div>
