@@ -14,7 +14,7 @@
 			<div onclick="window.location='view/' + <%= i[0]%>" class="box">
 				<div class="box1">
 					<p class="title"><%= i[2]%></p>
-					<p class="desc"><%= i[3]%></p>
+					<p class="desc"><%= i[3][0..60]%><%=if i[3].length>60 then + '...' end%></p>
 					<p class="creator"><%= i[1]%></p>
 				</div>
 			</div>

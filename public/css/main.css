@@ -49,6 +49,17 @@ h1{
 	align-items: center;
 }
 
+.boxpost{
+	background-color: lightgray;
+	width: 95%;
+	height: 250px;
+	margin-top: 30px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
 a{
 	text-decoration: none;
 	width: 250px;
@@ -182,7 +193,7 @@ input{
 	cursor: pointer;
 }
 
-#publish:hover{
+publishbtn:hover{
 	background-color: #191919;
 	cursor: pointer;
 }
@@ -230,8 +241,9 @@ input{
 	resize: none;
 }
 
-#publish{
+.publishbtn{
 	height: 40px;
+	width: 185px;
 	margin-top: 20px;
 	border: none;
 	color: rgba(255,255,255,0.8);
@@ -289,4 +301,38 @@ input{
 .box1{
 	width: 80%;
 	height: 125px;
+}
+
+.box1post{
+	width: 80%;
+	height: 250px;
+}
+
+.errorbox{
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.titlepost{
+	font-weight: bold;
+	font-size: 30px;
+	height: 30px;
+}
+
+.descpost{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 14px;
+	color: black;
+	opacity: 0.6;
+	height: 150px;
+}
+
+.creatorpost{
+	font-style: italic;
+	font-weight: bold;
 }
