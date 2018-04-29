@@ -72,6 +72,7 @@ a{
 
 a:hover{
 	background-color: #212121;
+	cursor: pointer;
 }
 
 .content{
@@ -97,6 +98,7 @@ i{
 
 i:hover{
 	background-color: darkgray;
+	cursor: pointer;
 }
 
 .fav{
@@ -193,7 +195,7 @@ input{
 	cursor: pointer;
 }
 
-publishbtn:hover{
+.publishbtn:hover{
 	background-color: #191919;
 	cursor: pointer;
 }

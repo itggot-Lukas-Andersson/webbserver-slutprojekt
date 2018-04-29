@@ -16,7 +16,13 @@ class App < Sinatra::Base
 	end
 
 	get('/') do
-		erb(:index)
+		user_id = session[:user_id] 
+		if user_id
+			all = get_recent()
+			erb(:home, locals:{posts:all})
+		else
+			erb(:index)
+		end
 	end
 
 	get('/create') do
@@ -146,11 +152,16 @@ class App < Sinatra::Base
 	post('/post/publish') do
 		user_id = session[:user_id]
 		if user_id
-			username = session[:username]
 			title = params["title"]
 			content = params["content"]
-			publish_post(username, title, content)
-			redirect('/home')
+			if content.length>10 && title.length>5
+				username = session[:username]
+				publish_post(username, title, content)
+				redirect('/home')
+			else
+				set_error("Too short content or title!")
+				redirect('/error')
+			end
 		else
 			redirect('/')
 		end
