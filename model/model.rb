@@ -9,7 +9,7 @@ module ForumDB
 
     def get_user username
         db = db_connect()
-        result = db.execute("SELECT * FROM users WHERE username=?", [username])
+        result = db.execute("SELECT * FROM users WHERE username IS ?", [username])
         return result.first
     end
 
@@ -56,7 +56,7 @@ module ForumDB
 
     def fetch_liked_posts id
         db = db_connect()
-        return db.execute("SELECT * FROM post WHERE id IN (SELECT post FROM likes WHERE user = ?)", [id])
+        return db.execute("SELECT * FROM post WHERE id IN (SELECT post FROM likes WHERE user IS ?)", [id])
     end
 
     def check_fav id, post

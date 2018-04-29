@@ -136,8 +136,13 @@ class App < Sinatra::Base
 	end
 
 	post('/logout') do
-		session.destroy
-		redirect('/')
+		user_id = session[:user_id]
+		if user_id
+			session.destroy
+			redirect('/')
+		else
+			redirect('/')
+		end
 	end
 
 	get('/post') do
