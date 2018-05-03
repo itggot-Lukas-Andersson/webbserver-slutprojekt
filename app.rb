@@ -1,4 +1,6 @@
 require_relative './model/model'
+require "erb"
+include ERB::Util
 
 class App < Sinatra::Base
 
@@ -32,7 +34,7 @@ class App < Sinatra::Base
 	get('/view/:id') do
 		user_id = session[:user_id] 
 		if user_id
-			id = params[:id]
+			id = html_escape(params[:id])
 			post = post_info(id)
 			comments = fetch_comments(id)
 			fav = check_fav(user_id, id)
@@ -45,9 +47,9 @@ class App < Sinatra::Base
 	post('/view/:id/comment') do
 		user_id = session[:user_id] 
 		if user_id
-			content = params["content"]
+			content = html_escape(params["content"])
 			username = session[:username]
-			id = params[:id]
+			id = html_escape(params[:id])
 			publish_comment(username, content, id)
 			redirect('/view/' + id)
 
@@ -87,9 +89,9 @@ class App < Sinatra::Base
 	end
 
 	post('/create') do
-		username = params["username"]
-		password = params["password"]
-		password_confirmation = params["confirm_password"]
+		username = html_escape(params["username"])
+		password = html_escape(params["password"])
+		password_confirmation = html_escape(params["confirm_password"])
 
 		userid = get_user(username)
 
@@ -113,8 +115,8 @@ class App < Sinatra::Base
 	end
 
 	post('/login') do
-		username = params["username"]
-		password = params["password"]
+		username = html_escape(params["username"])
+		password = html_escape(params["password"])
 		
 		user = get_user(username)
 
@@ -157,8 +159,8 @@ class App < Sinatra::Base
 	post('/post/publish') do
 		user_id = session[:user_id]
 		if user_id
-			title = params["title"]
-			content = params["content"]
+			title = html_escape(params["title"])
+			content = html_escape(params["content"])
 			if content.length>10 && title.length>5
 				username = session[:username]
 				publish_post(username, title, content)
@@ -175,7 +177,7 @@ class App < Sinatra::Base
 	post('/view/:id/favorite') do
 		user_id = session[:user_id] 
 		if user_id
-			id = params[:id]
+			id = html_escape(params[:id])
 			favorited = check_fav(user_id, id)
 			if favorited[0]
 				unfav(user_id, id)
